@@ -1,0 +1,1 @@
+{"name":"rr-apresentacao","private":true,"version":"1.0.0","scripts":{"build":"tailwindcss -i ./src/input.css -o ./assets/styles.css --minify"},"devDependencies":{"tailwindcss":"4.3.3","@tailwindcss/cli":"4.3.3"}}
