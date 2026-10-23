@@ -5,3 +5,17 @@
 @media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:30px;padding-block:45px}.hero-photo img{height:auto;aspect-ratio:4/3;object-position:center}.training-options{grid-template-columns:1fr;gap:35px;margin-top:32px}.example-area{margin-top:45px;padding-top:45px}.demo-right{min-height:390px}.journey h3{font-size:25px}}
 
 .journey-number{background:var(--navy);color:#fff}
+
+/* Alinhamento da abertura e espaçamento superior das seções. */
+.hero .hero-grid { align-items: start; padding-top: 54px; }
+.hero .hero-copy { align-self: start; }
+.hero .hero-copy h1 { margin-top: 0; }
+.section { padding-top: 64px; }
+.example-area { padding-top: 40px; }
+.closing { padding-top: 54px; }
+@media (max-width: 760px) {
+  .hero .hero-grid { padding-top: 32px; }
+  .section { padding-top: 44px; }
+  .example-area { padding-top: 30px; }
+  .closing { padding-top: 40px; }
+}

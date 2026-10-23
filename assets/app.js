@@ -31,13 +31,19 @@ function setupReveals(){
     el.classList.add('reveal');
   });
   revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
-    if(entry.isIntersecting){entry.target.classList.add('visible');revealObserver.unobserve(entry.target);}
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    } else if(entry.boundingClientRect.bottom <= 0 || entry.boundingClientRect.top >= window.innerHeight){
+      // Reativa a entrada somente depois que o elemento sai completamente da tela.
+      entry.target.classList.remove('visible');
+    }
   }),{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
   document.documentElement.classList.add('motion');
   targets.forEach(el=>revealObserver.observe(el));
 }
 setupReveals();
-reduce.addEventListener('change',setupReveals);
+if(reduce.addEventListener)reduce.addEventListener('change',setupReveals);
+else if(reduce.addListener)reduce.addListener(setupReveals);
 // Elementos alcançados por teclado são mostrados imediatamente.
 document.addEventListener('focusin',event=>{
   const target=event.target.closest('.reveal');
