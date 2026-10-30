@@ -50,3 +50,9 @@ document.addEventListener('focusin',event=>{
   if(target)target.classList.add('visible');
 });
 let ticking=false;function progress(){const max=document.documentElement.scrollHeight-window.innerHeight;$('.reading-progress').style.width=(max>0?Math.min(100,Math.max(0,window.scrollY/max*100)):100)+'%';ticking=false;}window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(progress);ticking=true;}},{passive:true});window.addEventListener('resize',progress);progress();
+
+// A trilha aparece com a seção; sem bloquear a rolagem.
+const journey=document.querySelector('.journey');
+if('IntersectionObserver' in window){const pathObserver=new IntersectionObserver(entries=>{entries.forEach(e=>journey.classList.toggle('in-view',e.isIntersecting));},{threshold:0.15});pathObserver.observe(journey);}else{journey.classList.add('in-view');}
+// Fecha o menu antes de calcular o destino, inclusive em telas pequenas.
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{const id=link.getAttribute('href');const destination=id.length>1?document.querySelector(id):null;if(!destination)return;event.preventDefault();nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menu');requestAnimationFrame(()=>{const offset=document.querySelector('.site-header').getBoundingClientRect().bottom+20;const top=destination.getBoundingClientRect().top+window.scrollY-offset;window.scrollTo({top:Math.max(0,top),behavior:reduce.matches?'auto':'smooth'});history.replaceState(null,'',id);});}));
